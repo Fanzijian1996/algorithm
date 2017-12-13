@@ -1,2 +1,2 @@
 # algorithm
-the task in algorithm
+the task in algorithm course
