@@ -1,0 +1,12 @@
+size:4
+fftTime:0.000116786s
+NormalTime:1.66e-06s
+size:16
+fftTime:0.000389362s
+NormalTime:1.3371e-05s
+size:32
+fftTime:0.000770836s
+NormalTime:4.607e-05s
+size:60
+fftTime:0.00165496s
+NormalTime:0.000173913s

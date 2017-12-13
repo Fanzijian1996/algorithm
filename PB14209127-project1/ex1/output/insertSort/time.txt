@@ -1,0 +1,6 @@
+size:2	time:3.505e-06s
+size:5	time:2.8797e-05s
+size:8	time:0.000533968s
+size:11	time:0.0324971s
+size:14	time:1.9699s
+size:17	time:156.763s
