@@ -2,6 +2,7 @@
 #define _RBTREE_
 #include<fstream>
 #include<iostream>
+#include<list>
 enum RBcolor{BLACK,RED};
 class RBNode{
 public:
@@ -49,6 +50,7 @@ public:
     ~RBTree();
     RBNode* getroot()const;
     RBNode* osSelect(RBNode* ptrx,int i)const;
+    RBNode* osSelect(int i)const;
     void preorder(std::ofstream&writer)const;
     void inorder(std::ofstream&writer)const;
     void postorder(std::ofstream&writer)const;
@@ -58,9 +60,13 @@ public:
     void rbinsert(int key);
     void rbinsert(RBNode* ptrz);
     void rbdelete(RBNode* ptrx);
+    void rbdelete(int i);
     RBNode* treeMinimum();
     RBNode* treeMinimum(RBNode* ptrz);
+    void display()const;
     void tinydelete(RBNode* ptrz);
+    void clear();
+
 
     //delete and free the node
 };

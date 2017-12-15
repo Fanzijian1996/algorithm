@@ -34,7 +34,7 @@ int main(int argc,char **argv)
   string path;
   if(argc==1){
     cerr<<"no input files!use default file!"<<endl;
-    path="../input/input.txt";
+    path="input.txt";
   }
   else{
      path=argv[1];

@@ -11,6 +11,7 @@ RBTree:: RBTree(){
     nil->parent=nullptr;
     nil->color=BLACK;
     nil->size=0;
+    nil->key=-1;
     root=nil;
     //size =0;
 }
@@ -28,9 +29,15 @@ void RBTree::tinydelete(RBNode* ptrz){
         ptrz=nullptr;
     }
 }
+
+void RBTree::clear(){
+    tinydelete(this->root);
+    this->root=nil;
+}
 RBTree:: ~RBTree(){
     //to be completed
     tinydelete(this->root);
+    this->root=nil;
 }
 RBNode* RBTree::getroot()const{
     return (this->root);
@@ -40,17 +47,26 @@ void RBTree::preorder(std::ofstream&writer)const{
     preorder(this->root,writer);
 }
 void RBTree::preorder(RBNode*ptrz,std::ofstream&writer)const{
-    if(ptrz==this->nil)
-        return;
-    else{
+    // if(ptrz==this->nil)
+    //     return;
+    // else{
+    //     writer<<"("<<ptrz->key<<","<<ptrz->color<<")";
+    //     if((ptrz->left!=this->nil)|(ptrz->right!=this->nil))
+    //         writer<<",";
+    //     preorder(ptrz->left,writer);
+    //     if(ptrz->right!=this->nil)
+    //         writer<<",";
+    //     preorder(ptrz->right,writer);
+    //     return ;
+    // }
+    if(ptrz!=this->nil){
         writer<<"("<<ptrz->key<<","<<ptrz->color<<")";
-        if((ptrz->left!=this->nil)|(ptrz->right!=this->nil))
+        if(ptrz->left!=nil)
             writer<<",";
         preorder(ptrz->left,writer);
-        if(ptrz->right!=this->nil)
+        if(ptrz->right!=nil)
             writer<<",";
         preorder(ptrz->right,writer);
-        return ;
     }
 }
 void RBTree::inorder(std::ofstream&writer)const{
@@ -79,7 +95,7 @@ void RBTree::postorder(RBNode* ptrz,std::ofstream&writer)const{
         postorder(ptrz->right,writer);
         if(ptrz->right!=this->nil)
             writer<<",";
-        writer<<ptrz->key;
+        writer<<"("<<ptrz->key<<","<<ptrz->color<<")";
     }
 }
 
@@ -164,6 +180,10 @@ void RBTree::rbdelete(RBNode*ptrz){
     ptrz=nullptr;
 }
 
+void RBTree::rbdelete(int i){
+    RBNode* ptr=osSelect(i);
+    rbdelete(ptr);
+}
 inline void RBTree::rbtransplant(RBNode*ptru,RBNode*ptrv){
     if(ptru->parent==this->nil){
         this->root=ptrv;
@@ -239,15 +259,15 @@ void RBTree::insertfixup(RBNode*ptrz){
                     ptrz=ptrz->parent->parent;//case 1
                 }
             else if(ptrz==ptrz->parent->right){
-                ptrz=ptrz->parent;//case 2
-                leftRotate(ptrz);//case 2
+                    ptrz=ptrz->parent;//case 2
+                    leftRotate(ptrz);//case 2
+                    }
+                    else{
+                        ptrz->parent->color=BLACK;
+                        ptrz->parent->parent->color=RED;//case 3
+                        rightRotate(ptrz->parent->parent);//case 3
+                    }
                 }
-                else{
-                    ptrz->parent->color=BLACK;
-                    ptrz->parent->parent->color=RED;//case 3
-                    rightRotate(ptrz->parent->parent);//case 3
-                }
-            }
             else{
                 RBNode* ptry=ptrz->parent->parent->left;
                 if(ptry->color==RED){
@@ -344,3 +364,39 @@ RBNode* RBTree::osSelect(RBNode* ptrx,int i)const{
             }
         }
     }
+
+RBNode* RBTree::osSelect(int i)const{
+    osSelect(this->root,i);
+}
+void RBTree::display()const{
+    std::cout<<"display the Red Black Tree"<<std::endl;
+    std::cout<<"("<<"key"<<","<<"color"<<","<<"parent"<<")"<<std::endl;
+    std::list<RBNode*> mylist;
+    mylist.push_back(this->root);
+    int cur_count=1;
+    int next_count=0;
+    while(!mylist.empty()){
+        next_count=0;
+        for(int i=0;i<cur_count;i++)
+        {
+            RBNode *temptr=mylist.front();
+            mylist.pop_front();
+            if(temptr->left!=this->nil){
+                mylist.push_back(temptr->left);
+                next_count++;
+                //std::cout<<"hello"<<std::endl;
+            }
+            if(temptr->right!=this->nil){
+                mylist.push_back(temptr->right);
+                next_count++;
+            }
+            std::cout<<"("<<temptr->key<<",";
+            if(temptr->color)
+                std::cout<<"R";
+            else std::cout<<"B";
+            std::cout<<","<<temptr->parent->key<<")"<<" ";
+        }
+        std::cout<<std::endl;
+        cur_count=next_count;
+    }
+}

@@ -1,0 +1,3 @@
+size:12
+every 10 insert :9.652e-06s
+total time:6.184e-06s

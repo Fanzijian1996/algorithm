@@ -12,10 +12,19 @@ int main(){
     // //T.rbinsert(4);
     // T.rbinsert(5);
     // T.rbinsert(6);
-    T.preorder(writer);
+    //cout<<T.osSelect(10)->key<<endl;
+    //T.display();
+    //std::cout<<T.osSelect(3)->key<<std::endl;
+    cout<<T.osSelect(9)->size<<endl;
+    T.rbdelete(8);
+    T.display();
+    T.inorder(writer);
     writer<<endl;
-    writer<<"("<<T.getroot()->key<<","<<T.getroot()->color<<")"<<endl;
+
+    //writer<<"("<<T.getroot()->key<<","<<T.getroot()->color<<")"<<endl;
     writer.close();
     cout<<T.getroot()->size<<endl;
+    // cout<<T.getroot()->size<<endl;
+    // T.display();
     return 0;
 }
