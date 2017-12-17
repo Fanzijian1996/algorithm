@@ -139,6 +139,9 @@ void RBTree::rbinsert(RBNode*ptrz){
 
 void RBTree::rbdelete(RBNode*ptrz){
     //delete a node;
+    // if(ptrz==ptrz->parent->left){
+    //     std::cout<<"right right"<<std::endl;
+    // }
     RBNode* ptrtemp=this->root;
     while(ptrtemp->key!=ptrz->key){
         ptrtemp->size=ptrtemp->size-1;
@@ -146,18 +149,26 @@ void RBTree::rbdelete(RBNode*ptrz){
             ptrtemp=ptrtemp->left;
         else ptrtemp=ptrtemp->right;
     }//find the path to ptrz from the root
+    //std::cout<<ptrtemp->key<<std::endl;
     RBNode* ptry=ptrz;
     RBNode* ptrx=nullptr;
     RBcolor yOriColor=ptry->color;
     if(ptrz->left==this->nil){
         ptrx=ptrz->right;
+        // if(ptrz==ptrz->parent->right){
+        //     std::cout<<"right right"<<std::endl;
+        // }
         rbtransplant(ptrz,ptrz->right);
+        // if(ptrx==ptrx->parent->left){
+        //     std::cout<<"left left "<<std::endl;
+        // }
     }
     else if(ptrz->right==this->nil){
         ptrx=ptrz->left;
         rbtransplant(ptrz,ptrz->left);
     }
     else{
+        //std::cout<<"hahah"<<std::endl;
         ptry=treeMinimum(ptrz->right);
         yOriColor=ptry->color;
         ptrx=ptry->right;
@@ -174,14 +185,26 @@ void RBTree::rbdelete(RBNode*ptrz){
         ptry->left->parent=ptry;
         ptry->color=ptrz->color;
     }
-    if(yOriColor==BLACK)
+    //std::cout<<"ptrx:"<<ptrx->key<<std::endl;
+    // delete ptrz;
+    // ptrz=nullptr;
+    // if(ptrz==ptrz->parent->right){
+    //     std::cout<<"right right"<<std::endl;
+    // }
+    if(yOriColor==BLACK){
         deletefixup(ptrx);
+        //std::cout<<"BLACK"<<std::endl;
+    }
+
     delete ptrz;
     ptrz=nullptr;
 }
 
 void RBTree::rbdelete(int i){
     RBNode* ptr=osSelect(i);
+    // if(ptr->key==i){
+    //     std::cout<<"find the node:"<<i<<std::endl;
+    // }
     rbdelete(ptr);
 }
 inline void RBTree::rbtransplant(RBNode*ptru,RBNode*ptrv){
@@ -189,7 +212,7 @@ inline void RBTree::rbtransplant(RBNode*ptru,RBNode*ptrv){
         this->root=ptrv;
         //ptrv->parent=this->nil;
     }
-    else if(ptru=ptru->parent->left)
+    else if(ptru==ptru->parent->left)
             ptru->parent->left=ptrv;
         else ptru->parent->right=ptrv;
     ptrv->parent=ptru->parent;
@@ -291,10 +314,20 @@ void RBTree::insertfixup(RBNode*ptrz){
 }
 
 void RBTree::deletefixup(RBNode*ptrx){
+    // if(ptrx==ptrx->parent->right){
+    //     std::cout<<"right"<<std::endl;
+    //     exit(-1);
+    // }
     //
     while(ptrx!=this->root&&ptrx->color==BLACK){
         if(ptrx==ptrx->parent->left){
+            // std::cout<<"left"<<std::endl;
+            // if(this->nil->parent==nullptr){
+            //     std::cout<<"true"<<std::endl;
+            // }
             RBNode* ptrw=ptrx->parent->right;
+            // std::cout<<"ptrw:"<<ptrw->key<<std::endl;
+            // std::cout<<ptrx->key<<std::endl;
             if(ptrw->color==RED){//case 1
                 ptrw->color=BLACK;
                 ptrx->parent->color=RED;
@@ -399,4 +432,12 @@ void RBTree::display()const{
         std::cout<<std::endl;
         cur_count=next_count;
     }
+}
+
+RBNode* RBTree::getnil()const{
+    return this->nil;
+}
+
+int RBTree::size()const{
+    return this->root->size;
 }

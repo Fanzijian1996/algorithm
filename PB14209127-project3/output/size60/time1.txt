@@ -1,8 +1,8 @@
 size:60
-every 10 insert :8.71e-06s
-every 10 insert :8.229e-06s
-every 10 insert :5.788e-06s
-every 10 insert :6.3e-06s
-every 10 insert :8.58e-06s
-every 10 insert :7.122e-06s
-total time:3.1323e-05s
+every 10 insert :2.36e-06s
+every 10 insert :1.417e-06s
+every 10 insert :1.497e-06s
+every 10 insert :1.435e-06s
+every 10 insert :1.659e-06s
+every 10 insert :2.104e-06s
+total time:7.399e-06s

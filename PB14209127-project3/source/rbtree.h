@@ -48,6 +48,8 @@ public:
     RBTree();
     RBTree(const RBTree&Tree);
     ~RBTree();
+    int size()const;
+    RBNode* getnil()const;
     RBNode* getroot()const;
     RBNode* osSelect(RBNode* ptrx,int i)const;
     RBNode* osSelect(int i)const;

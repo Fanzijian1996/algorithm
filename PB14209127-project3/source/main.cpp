@@ -12,7 +12,7 @@ int main(){
     std::chrono::duration<double> total_time;
     ofstream preWriter,inWriter,postWriter,timeWriter,time2Writer,deleteDataWriter;
     cout<<"exe 1 start"<<endl;
-    for(int i=0;i<1;i++){
+    for(int i=0;i<5;i++){
         vector<int> vec;
         RBTree T;
         string resultPath("../output/size");
@@ -21,8 +21,8 @@ int main(){
         string postPath("postorder.txt");
         string timePath("time1.txt");
         //exe2
-        // string time2Path("time2.txt");
-        // string deletePath("delete_data.txt");
+        string time2Path("time2.txt");
+        string deletePath("delete_data.txt");
         //exe2
         string temp=to_string(array[i]);
         resultPath=resultPath+temp+"/";
@@ -33,16 +33,16 @@ int main(){
         postPath=resultPath+postPath;
         timePath=resultPath+timePath;
         //exe2
-        // time2Path=resultPath+time2Path;
-        // deletePath=resultPath+deletePath;
+        time2Path=resultPath+time2Path;
+        deletePath=resultPath+deletePath;
         //exe2
         preWriter.open(prePath,fstream::out|fstream::trunc);
         inWriter.open(inPath,fstream::out|fstream::trunc);
         postWriter.open(postPath,fstream::out|fstream::trunc);
         timeWriter.open(timePath,fstream::out|fstream::trunc);
         //exe2
-        // time2Writer.open(time2Path,fstream::out|fstream::trunc);
-        // deleteDataWriter.open(deletePath,fstream::out|fstream::trunc);
+        time2Writer.open(time2Path,fstream::out|fstream::trunc);
+        deleteDataWriter.open(deletePath,fstream::out|fstream::trunc);
         //exe2
         timeWriter<<"size:"<<array[i]<<endl;
         start = std::chrono::system_clock::now();
@@ -73,17 +73,16 @@ int main(){
         T.preorder(preWriter);
         //T.inorder(inWriter);
         T.postorder(postWriter);
-        T.display();
-        T.rbdelete(array[i]-1);
-        T.inorder(preWriter);
+
+        T.inorder(inWriter);
         //T.display();
         //exe2
-        // RBNode* ptrTemp=T.osSelect(array[i]/3);
-        // deleteDataWriter<<"("<<ptrTemp->key<<","<<ptrTemp->color<<")"<<endl;
-        // T.rbdelete(ptrTemp);
-        // ptrTemp=T.osSelect((array[i]-1)/4);
-        // deleteDataWriter<<"("<<ptrTemp->key<<","<<ptrTemp->color<<")"<<endl;
-        //T.rbdelete(ptrTemp);
+        RBNode* ptrTemp=T.osSelect(T.size()/3);
+        deleteDataWriter<<"("<<ptrTemp->key<<","<<ptrTemp->color<<")"<<endl;
+        T.rbdelete(ptrTemp);
+        ptrTemp=T.osSelect((T.size())/4);
+        deleteDataWriter<<"("<<ptrTemp->key<<","<<ptrTemp->color<<")"<<endl;
+        T.rbdelete(ptrTemp);
         //exe2
         //cout<<"hello world"<<endl;
         // T.display();
@@ -91,8 +90,8 @@ int main(){
         inWriter.close();
         postWriter.close();
         timeWriter.close();
-        //time2Writer.close();
-        // deleteDataWriter.close();
+        time2Writer.close();
+        deleteDataWriter.close();
         //T.display();
     }
     cout<<"exe 1 end"<<endl;
