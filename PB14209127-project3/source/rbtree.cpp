@@ -434,9 +434,9 @@ void RBTree::display()const{
     }
 }
 
-RBNode* RBTree::getnil()const{
-    return this->nil;
-}
+// RBNode* RBTree::getnil()const{
+//     return this->nil;
+// }
 
 int RBTree::size()const{
     return this->root->size;

@@ -1,10 +1,9 @@
 #include"random.h"
-#define MAXLEN 1000
 #define SIZE 120
 #define MAX 150
 #define MIN 1
 using namespace std;
-void creatfile(const string&path,int lenth=MAXLEN)
+void creatfile(const string&path,int lenth=MAX+1)
 {
   ofstream filewriter(path,fstream::out|fstream::trunc);
   if(!filewriter){
@@ -39,6 +38,6 @@ int main(int argc,char **argv)
   else{
      path=argv[1];
   }
-  creatfile(path,MAXLEN);
+  creatfile(path);
   return 0;
 }

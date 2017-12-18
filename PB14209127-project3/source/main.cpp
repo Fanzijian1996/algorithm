@@ -1,5 +1,6 @@
 #include"rbtree.h"
 #include"readfile.h"
+#include"select.h"
 #include<iostream>
 #include<string>
 #include<fstream>
@@ -11,7 +12,7 @@ int main(){
     std::chrono::duration<double> elapsed_seconds;
     std::chrono::duration<double> total_time;
     ofstream preWriter,inWriter,postWriter,timeWriter,time2Writer,deleteDataWriter;
-    cout<<"exe 1 start"<<endl;
+    //cout<<"exe 1 start"<<endl;
     for(int i=0;i<5;i++){
         vector<int> vec;
         RBTree T;
@@ -77,15 +78,32 @@ int main(){
         T.inorder(inWriter);
         //T.display();
         //exe2
+        deleteDataWriter<<"osSelect:"<<endl;
         RBNode* ptrTemp=T.osSelect(T.size()/3);
         deleteDataWriter<<"("<<ptrTemp->key<<","<<ptrTemp->color<<")"<<endl;
+        start = std::chrono::system_clock::now();
         T.rbdelete(ptrTemp);
+        end = std::chrono::system_clock::now();
+        elapsed_seconds=end-start;
+        time2Writer<<"delete time:"<<elapsed_seconds.count()<<"s"<<endl;
         ptrTemp=T.osSelect((T.size())/4);
         deleteDataWriter<<"("<<ptrTemp->key<<","<<ptrTemp->color<<")"<<endl;
+        start = std::chrono::system_clock::now();
         T.rbdelete(ptrTemp);
+        end = std::chrono::system_clock::now();
+        elapsed_seconds=end-start;
+        time2Writer<<"delete time:"<<elapsed_seconds.count()<<"s"<<endl;
         //exe2
-        //cout<<"hello world"<<endl;
-        // T.display();
+        //test
+        deleteDataWriter<<"using linear algorithm:"<<endl;
+        vector<int>::iterator itr=select(vec,0,vec.size()-1,vec.size()/3);
+        // for(int i=0;i<vec.size();i++)
+        //     cout<<vec[i]<<endl;
+        deleteDataWriter<<*(itr)<<endl;
+        //cout<<*itr<<endl;
+        vec.erase(itr);
+
+        deleteDataWriter<<*(select(vec,0,vec.size()-1,vec.size()/4))<<endl;
         preWriter.close();
         inWriter.close();
         postWriter.close();
@@ -94,6 +112,7 @@ int main(){
         deleteDataWriter.close();
         //T.display();
     }
-    cout<<"exe 1 end"<<endl;
+    //cout<<"exe 1 end"<<endl;
+    return 0;
 
 }

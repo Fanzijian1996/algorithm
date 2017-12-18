@@ -1,4 +1,4 @@
 size:24
-every 10 insert :2.195e-06s
-every 10 insert :2.023e-06s
-total time:8.192e-06s
+every 10 insert :4.433e-06s
+every 10 insert :8.129e-06s
+total time:6.67e-06s

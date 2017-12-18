@@ -1,2 +1,6 @@
+osSelect:
 (45,1)
 (37,0)
+using linear algorithm:
+45
+37
