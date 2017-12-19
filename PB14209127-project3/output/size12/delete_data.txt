@@ -1,6 +1,6 @@
 osSelect:
-(38,0)
-(23,0)
+(47,1)
+(25,0)
 using linear algorithm:
-38
-23
+47
+25

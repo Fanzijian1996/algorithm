@@ -13,7 +13,7 @@ int main(){
     std::chrono::duration<double> total_time;
     ofstream preWriter,inWriter,postWriter,timeWriter,time2Writer,deleteDataWriter;
     //cout<<"exe 1 start"<<endl;
-    for(int i=0;i<5;i++){
+    for(int i=1;i<5;i++){
         vector<int> vec;
         RBTree T;
         string resultPath("../output/size");
@@ -76,8 +76,10 @@ int main(){
         T.postorder(postWriter);
 
         T.inorder(inWriter);
-        //T.display();
         //exe2
+        cout<<"size:"<<array[i]<<endl;
+        cout<<"initial:"<<endl;
+        T.display();
         deleteDataWriter<<"osSelect:"<<endl;
         RBNode* ptrTemp=T.osSelect(T.size()/3);
         deleteDataWriter<<"("<<ptrTemp->key<<","<<ptrTemp->color<<")"<<endl;
@@ -86,13 +88,18 @@ int main(){
         end = std::chrono::system_clock::now();
         elapsed_seconds=end-start;
         time2Writer<<"delete time:"<<elapsed_seconds.count()<<"s"<<endl;
-        ptrTemp=T.osSelect((T.size())/4);
+        cout<<"delete first node:"<<endl;
+        T.display();
+        //std::cout<<T.size()<<endl;
+        ptrTemp=T.osSelect(T.size()/4);
         deleteDataWriter<<"("<<ptrTemp->key<<","<<ptrTemp->color<<")"<<endl;
         start = std::chrono::system_clock::now();
-        T.rbdelete(ptrTemp);
+        T.rbdelete(T.size()/4);
         end = std::chrono::system_clock::now();
         elapsed_seconds=end-start;
         time2Writer<<"delete time:"<<elapsed_seconds.count()<<"s"<<endl;
+        cout<<"delete second node:"<<endl;
+        T.display();
         //exe2
         //test
         deleteDataWriter<<"using linear algorithm:"<<endl;

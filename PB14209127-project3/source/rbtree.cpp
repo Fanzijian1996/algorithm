@@ -402,8 +402,8 @@ RBNode* RBTree::osSelect(int i)const{
     osSelect(this->root,i);
 }
 void RBTree::display()const{
-    std::cout<<"display the Red Black Tree"<<std::endl;
-    std::cout<<"("<<"key"<<","<<"color"<<","<<"parent"<<")"<<std::endl;
+    //std::cout<<"display the Red Black Tree"<<std::endl;
+    //std::cout<<"("<<"key"<<","<<"color"<<","<<"parent"<<")"<<std::endl;
     std::list<RBNode*> mylist;
     mylist.push_back(this->root);
     int cur_count=1;
